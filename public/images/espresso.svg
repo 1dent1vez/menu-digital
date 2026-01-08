@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6e7d4"/>
+      <stop offset="1" stop-color="#f0d2b3"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" rx="24" fill="url(#bg)"/>
+  <rect x="70" y="80" width="180" height="60" rx="18" fill="#ffffff" opacity="0.85"/>
+  <rect x="92" y="60" width="136" height="30" rx="12" fill="#3b2f2f" opacity="0.9"/>
+  <rect x="120" y="140" width="80" height="12" rx="6" fill="#d2b48c"/>
+  <text x="160" y="110" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#3b2f2f">ESPRESSO</text>
+</svg>

@@ -1,0 +1,203 @@
+[
+  {
+    "id": "espresso",
+    "name": "Espresso clasico",
+    "description": "Cafe corto e intenso.",
+    "category": "Cafe",
+    "basePrice": 6,
+    "image": "/images/espresso.svg",
+    "variants": [
+      {
+        "id": "size",
+        "name": "Tamano",
+        "required": true,
+        "options": [
+          { "id": "simple", "name": "Simple", "price": 0 },
+          { "id": "doble", "name": "Doble", "price": 2 }
+        ]
+      }
+    ],
+    "extras": [
+      {
+        "id": "milk",
+        "name": "Leche",
+        "maxSelect": 1,
+        "options": [
+          { "id": "entera", "name": "Entera", "price": 0 },
+          { "id": "deslactosada", "name": "Deslactosada", "price": 1 },
+          { "id": "almendra", "name": "Almendra", "price": 2 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "latte",
+    "name": "Latte vainilla",
+    "description": "Cafe con leche y vainilla.",
+    "category": "Cafe",
+    "basePrice": 10,
+    "image": "/images/latte.svg",
+    "variants": [
+      {
+        "id": "size",
+        "name": "Tamano",
+        "required": true,
+        "options": [
+          { "id": "mediano", "name": "Mediano", "price": 0 },
+          { "id": "grande", "name": "Grande", "price": 3 }
+        ]
+      }
+    ],
+    "extras": [
+      {
+        "id": "syrup",
+        "name": "Jarabes",
+        "maxSelect": 2,
+        "options": [
+          { "id": "caramelo", "name": "Caramelo", "price": 1.5 },
+          { "id": "avellana", "name": "Avellana", "price": 1.5 },
+          { "id": "coco", "name": "Coco", "price": 1.5 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cold-brew",
+    "name": "Cold brew citrus",
+    "description": "Infusion fria con notas citricas.",
+    "category": "Bebidas",
+    "basePrice": 12,
+    "image": "/images/coldbrew.svg",
+    "variants": [
+      {
+        "id": "size",
+        "name": "Tamano",
+        "required": true,
+        "options": [
+          { "id": "regular", "name": "Regular", "price": 0 },
+          { "id": "grande", "name": "Grande", "price": 2 }
+        ]
+      }
+    ],
+    "extras": [
+      {
+        "id": "ice",
+        "name": "Hielo",
+        "maxSelect": 1,
+        "options": [
+          { "id": "normal", "name": "Normal", "price": 0 },
+          { "id": "extra", "name": "Extra", "price": 0 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "limonada",
+    "name": "Limonada herbal",
+    "description": "Limon con hierbabuena y gengibre.",
+    "category": "Bebidas",
+    "basePrice": 9,
+    "image": "/images/limonada.svg",
+    "variants": [
+      {
+        "id": "size",
+        "name": "Tamano",
+        "required": true,
+        "options": [
+          { "id": "regular", "name": "Regular", "price": 0 },
+          { "id": "jarra", "name": "Jarra", "price": 6 }
+        ]
+      }
+    ],
+    "extras": [
+      {
+        "id": "toppings",
+        "name": "Toppings",
+        "maxSelect": 2,
+        "options": [
+          { "id": "chia", "name": "Chia", "price": 1 },
+          { "id": "frutosrojos", "name": "Frutos rojos", "price": 2 },
+          { "id": "pepino", "name": "Pepino", "price": 1 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sandwich-pollo",
+    "name": "Sandwich de pollo",
+    "description": "Pollo a la plancha, queso y lechuga.",
+    "category": "Comida",
+    "basePrice": 16,
+    "image": "/images/sandwich.svg",
+    "variants": [
+      {
+        "id": "bread",
+        "name": "Pan",
+        "required": true,
+        "options": [
+          { "id": "brioche", "name": "Brioche", "price": 0 },
+          { "id": "integral", "name": "Integral", "price": 0 }
+        ]
+      }
+    ],
+    "extras": [
+      {
+        "id": "sauces",
+        "name": "Salsas",
+        "maxSelect": 2,
+        "options": [
+          { "id": "chipotle", "name": "Chipotle", "price": 1 },
+          { "id": "mayo", "name": "Mayo casera", "price": 0.5 },
+          { "id": "bbq", "name": "BBQ", "price": 1 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "croissant",
+    "name": "Croissant de mantequilla",
+    "description": "Horneado al dia.",
+    "category": "Comida",
+    "basePrice": 8,
+    "image": "/images/croissant.svg"
+  },
+  {
+    "id": "bowl-granola",
+    "name": "Bowl granola",
+    "description": "Yogurt, frutas frescas y granola.",
+    "category": "Comida",
+    "basePrice": 14,
+    "image": "/images/bowl.svg",
+    "extras": [
+      {
+        "id": "fruits",
+        "name": "Frutas",
+        "maxSelect": 2,
+        "options": [
+          { "id": "fresa", "name": "Fresa", "price": 1 },
+          { "id": "mango", "name": "Mango", "price": 1 },
+          { "id": "banana", "name": "Banana", "price": 1 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "brownie",
+    "name": "Brownie cacao",
+    "description": "Chocolate oscuro con nuez.",
+    "category": "Comida",
+    "basePrice": 7,
+    "image": "/images/brownie.svg",
+    "extras": [
+      {
+        "id": "toppings",
+        "name": "Toppings",
+        "maxSelect": 2,
+        "options": [
+          { "id": "helado", "name": "Helado vainilla", "price": 3 },
+          { "id": "salsa", "name": "Salsa chocolate", "price": 1 }
+        ]
+      }
+    ]
+  }
+]

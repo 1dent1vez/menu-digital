@@ -1,0 +1,15 @@
+{
+  "businessName": "Luna Brava Cafe",
+  "whatsappNumber": "51999999999",
+  "currency": "PEN",
+  "deliveryFee": 6,
+  "minOrder": 20,
+  "hoursText": "Lun a Dom 8:00 - 22:00",
+  "addressText": "Av. Siempre Viva 123, Miraflores",
+  "lockTableFromUrl": true,
+  "orderTypesEnabled": {
+    "mesa": true,
+    "pickup": true,
+    "delivery": true
+  }
+}
