@@ -6,14 +6,24 @@ type ProductCardProps = {
   item: MenuItem;
   currency: string;
   onAdd: (item: MenuItem) => void;
+  isStoreOpen?: boolean; // Nueva prop para controlar el estado
 };
 
-export default function ProductCard({ item, currency, onAdd }: ProductCardProps) {
+export default function ProductCard({ 
+  item, 
+  currency, 
+  onAdd,
+  isStoreOpen = true // Por defecto abierto para no romper si falta la prop
+}: ProductCardProps) {
   const startingPrice = getProductStartingPrice(item);
   const hasOptions = Boolean(item.variants?.length || item.extras?.length);
 
   return (
-    <div className="flex flex-col gap-3 rounded-3xl border border-white/80 bg-white/80 p-4 shadow-md shadow-amber-100">
+    <div 
+      className={`flex flex-col gap-3 rounded-3xl border border-white/80 bg-white/80 p-4 shadow-md shadow-amber-100 transition-all duration-300 ${
+        !isStoreOpen ? "opacity-70 grayscale-[0.8]" : ""
+      }`}
+    >
       <div className="relative h-32 w-full overflow-hidden rounded-2xl">
         <Image
           src={item.image}
@@ -45,9 +55,18 @@ export default function ProductCard({ item, currency, onAdd }: ProductCardProps)
           <button
             type="button"
             onClick={() => onAdd(item)}
-            className="rounded-full bg-amber-500 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-amber-200 transition hover:bg-amber-600"
+            disabled={!isStoreOpen}
+            className={`rounded-full px-4 py-2 text-sm font-semibold text-white shadow-md transition ${
+              !isStoreOpen
+                ? "cursor-not-allowed bg-slate-400 shadow-none"
+                : "bg-amber-500 shadow-amber-200 hover:bg-amber-600"
+            }`}
           >
-            {hasOptions ? "Agregar" : "Agregar rapido"}
+            {!isStoreOpen 
+              ? "Cerrado" 
+              : hasOptions 
+                ? "Agregar" 
+                : "Agregar rápido"}
           </button>
         </div>
       </div>

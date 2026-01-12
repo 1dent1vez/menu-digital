@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import HeaderBar from "@/components/HeaderBar";
 import SearchBar from "@/components/SearchBar";
 import CategoryTabs from "@/components/CategoryTabs";
@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import AddToCartModal from "@/components/AddToCartModal";
 import { useCartStore } from "@/store/cartStore";
 import type { CartItem, Config, MenuItem } from "@/lib/types";
+import { isStoreOpen } from "@/lib/schedule"; // <--- Importamos la lógica
 import configData from "@/data/config.json";
 import menuData from "@/data/menu.json";
 
@@ -31,11 +32,34 @@ export default function MenuClient({ mesaParam }: MenuClientProps) {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("Todo");
   const [activeProduct, setActiveProduct] = useState<MenuItem | null>(null);
+  
+  // Nuevo estado para el horario (inicia true para evitar flash en carga)
+  const [isOpen, setIsOpen] = useState(true);
 
   const addItem = useCartStore((state) => state.addItem);
   const cartCount = useCartStore((state) =>
     state.items.reduce((sum, item) => sum + item.quantity, 0),
   );
+
+  // Efecto para verificar el horario
+  useEffect(() => {
+    // Función auxiliar para checar el horario
+    const checkSchedule = () => {
+      setIsOpen(isStoreOpen(config));
+    };
+
+    // 1. Verificación inicial: Usamos setTimeout para evitar el error de linter
+    // sobre "setState síncrono" y evitar conflictos de hidratación.
+    const initialCheck = setTimeout(checkSchedule, 0);
+
+    // 2. Intervalo para actualizar cada minuto
+    const intervalId = setInterval(checkSchedule, 60000);
+
+    return () => {
+      clearTimeout(initialCheck);
+      clearInterval(intervalId);
+    };
+  }, []);
 
   const categories = useMemo(() => {
     const unique = Array.from(new Set(menu.map((item) => item.category)));
@@ -57,6 +81,9 @@ export default function MenuClient({ mesaParam }: MenuClientProps) {
   }, [query, activeCategory]);
 
   const handleAdd = (item: MenuItem) => {
+    // Bloqueo de seguridad adicional por si hackean el botón
+    if (!isOpen) return;
+
     const needsModal = Boolean(item.variants?.length || item.extras?.length);
     if (needsModal) {
       setActiveProduct(item);
@@ -90,15 +117,25 @@ export default function MenuClient({ mesaParam }: MenuClientProps) {
           subtitle={config.hoursText}
         />
 
+        {/* --- AVISO DE TIENDA CERRADA --- */}
+        {!isOpen && (
+          <div className="animate-in fade-in slide-in-from-top-4 duration-500 rounded-2xl bg-rose-500 p-4 text-center text-white shadow-lg shadow-rose-200">
+            <p className="text-lg font-bold"> Local Cerrado</p>
+            <p className="text-sm opacity-90">
+              Nuestro horario es: {config.hoursText}
+            </p>
+          </div>
+        )}
+
         <div className="grid gap-5 rounded-3xl border border-white/70 bg-white/60 p-5 shadow-lg shadow-amber-100">
           <div className="flex flex-col gap-3 text-sm text-slate-600">
             {config.addressText ? (
               <p>
-                Direccion:{" "}
+                Dirección:{" "}
                 <span className="font-semibold">{config.addressText}</span>
               </p>
             ) : null}
-            <p>Explora el menu y arma tu pedido.</p>
+            <p>Explora el menú y arma tu pedido.</p>
           </div>
           <SearchBar value={query} onChange={setQuery} />
           <CategoryTabs
@@ -115,6 +152,7 @@ export default function MenuClient({ mesaParam }: MenuClientProps) {
               item={item}
               currency={config.currency}
               onAdd={handleAdd}
+              isStoreOpen={isOpen} // <--- Pasamos el estado aquí
             />
           ))}
           {filteredItems.length === 0 ? (

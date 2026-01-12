@@ -74,6 +74,18 @@ export type OrderDetails = {
   deliveryNotes?: string;
 };
 
+// --- NUEVOS TIPOS PARA EL HORARIO ---
+export type ScheduleDay = {
+  start: string; // Formato "HH:MM"
+  end: string;   // Formato "HH:MM"
+};
+
+export type ScheduleConfig = {
+  timezone: string;
+  // Usamos Record<string, ...> para mapear "0", "1", "2" a la configuración del día
+  days: Record<string, ScheduleDay | null>; 
+};
+
 export type Config = {
   businessName: string;
   whatsappNumber: string;
@@ -84,4 +96,5 @@ export type Config = {
   addressText?: string;
   lockTableFromUrl?: boolean;
   orderTypesEnabled: OrderTypesEnabled;
+  schedule: ScheduleConfig; // <-- Nueva propiedad agregada
 };
